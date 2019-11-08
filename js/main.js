@@ -4,6 +4,8 @@ var path = document.querySelector('#face');
 // Get length of path... ~577px in this case
 var pathLength = path.getTotalLength();
 
+console.log('pathLength', pathLength )
+
 // Make very long dashes (the length of the path itself)
 path.style.strokeDasharray = pathLength + ' ' + pathLength;
 
@@ -14,13 +16,26 @@ path.style.strokeDashoffset = pathLength;
 // https://jakearchibald.com/2013/animated-line-drawing-svg/
 path.getBoundingClientRect();
 
+
 // When the page scrolls...
 window.addEventListener("scroll", function(e) {
 
   // What % down is it?
   // https://stackoverflow.com/questions/2387136/cross-browser-method-to-determine-vertical-scroll-percentage-in-javascript/2387222#2387222
   // Had to try three or four differnet methods here. Kind of a cross-browser nightmare.
-  var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+  var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - window.innerHeight);
+
+
+
+   console.log('scrollPercentage', scrollPercentage )
+
+   console.log('document.documentElement.scrollHeight', document.documentElement.scrollHeight )
+   console.log('window.innerHeight', window.innerHeight )
+
+
+// document.documentElement.clientHeight should be the size of the window
+
 
   // Length to offset the dashes
   var drawLength = pathLength * scrollPercentage;
